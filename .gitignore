@@ -1,2 +1,4 @@
 venv
 settings.json
+awx-env-*
+./docker-compose.yml
