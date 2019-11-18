@@ -1,0 +1,55 @@
+---
+awx_web_docker_actual_image: "ansible/awx_web:9.0.1"
+awx_task_docker_actual_image: "ansible/awx_task:9.0.1"
+
+# Common Docker parameters
+awx_task_hostname: awx
+awx_web_hostname: awxweb
+postgres_data_dir: "~/.awx/pgdocker"
+host_port: 80
+host_port_ssl: 443
+#ssl_certificate: 
+docker_compose_dir: "~/.awx/awxcompose"
+# This will create or update a default admin (superuser) account in AWX, if not provided
+# then these default values are used
+admin_user: admin
+admin_password: password
+
+pg_username: awx
+pg_password: awxpass
+pg_database: awx
+pg_port: 5432
+#pg_sslmode: require
+
+
+# RabbitMQ Configuration
+rabbitmq_password: awxpass
+rabbitmq_erlang_cookie: cookiemonster
+
+# AWX Secret key
+# It's *very* important that this stay the same between upgrades or you will lose the ability to decrypt
+# your credentials
+secret_key: awxsecret
+
+# Advanced config
+dockerhub_version: "9.0.1"
+
+rabbitmq_version: "3.7.4"
+rabbitmq_image: "ansible/awx_rabbitmq:{{rabbitmq_version}}"
+rabbitmq_default_vhost: "awx"
+rabbitmq_erlang_cookie: "cookiemonster"
+rabbitmq_host: "rabbitmq"
+rabbitmq_port: "5672"
+rabbitmq_user: "guest"
+rabbitmq_password: "guest"
+
+postgresql_version: "10"
+postgresql_image: "postgres:{{postgresql_version}}"
+
+
+memcached_image: "memcached"
+memcached_version: "alpine"
+memcached_host: "memcached"
+memcached_port: "11211"
+
+
