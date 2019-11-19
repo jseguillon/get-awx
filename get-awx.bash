@@ -2,13 +2,13 @@
 
 # Bring up a local awk under docker-compose
 # Usage:
-#   wget -q -O - https://get.k8s.io | bash
+#   wget -q -O - https://raw.githubusercontent.com/jseguillon/get-awx/master/get-awx.bash | bash
 # or
-#   curl -fsSL https://get.k8s.io | bash
+#   curl -fsSL https://raw.githubusercontent.com/jseguillon/get-awx/master/get-awx.bash | bash
 #
 # Advanced options
 #  Set AWX_RELEASE to choose between different versions:
-#   * export AWX_RELEASE=9.0.1; wget -q -O - https://XXXX | bash
+#   * export AWX_RELEASE=9.0.1; wget -q -O - https://raw.githubusercontent.com/jseguillon/get-awx/master/get-awx.bash | bash
 
 set -o errexit
 set -o nounset
