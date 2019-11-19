@@ -63,3 +63,5 @@ f = open(os.path.join(target_dir, "SECRET_KEY"), "w")
 f.write(config_src['secret_key'])
 f.close()
 logging.info("Done => version named : %s", target_env_name)
+
+print("\n🔓 : ", config_src['admin_user'], " / ", config_src['admin_password'])

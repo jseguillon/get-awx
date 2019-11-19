@@ -27,6 +27,6 @@ function start_awx {
 
 bootstrap && start_awx
 
-echo "Started 👍"
+echo "👍 : Started"
 
 docker-compose ps
