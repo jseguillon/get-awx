@@ -5,11 +5,11 @@ awx_task_docker_actual_image: "ansible/awx_task:9.0.1"
 # Common Docker parameters
 awx_task_hostname: awx
 awx_web_hostname: awxweb
-postgres_data_dir: "~/.awx/pgdocker"
+postgres_data_dir: "{{target_dir}}/.awx/pgdocker"
 host_port: 80
 host_port_ssl: 443
-#ssl_certificate: 
-docker_compose_dir: "~/.awx/awxcompose"
+#ssl_certificate:
+docker_compose_dir: "{{target_dir}}/.awx/awxcompose"
 # This will create or update a default admin (superuser) account in AWX, if not provided
 # then these default values are used
 admin_user: admin
