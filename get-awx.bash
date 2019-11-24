@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Bring up a local awk under docker-compose
 # Usage:
 #   wget -q -O - https://raw.githubusercontent.com/jseguillon/get-awx/master/get-awx.bash | bash
@@ -11,24 +10,26 @@
 #   * export AWX_RELEASE=9.0.1; wget -q -O - https://raw.githubusercontent.com/jseguillon/get-awx/master/get-awx.bash | bash
 
 set -o errexit
-set -o nounset
 set -o pipefail
 
-# TODO arg test and default
-AWX_TARGET_DIR=${PWD}
+if [ "" == "$AWX_TARGET_DIR" ]; then
+  AWX_TARGET_DIR="${PWD}"
+fi
 mkdir -p ${AWX_TARGET_DIR}
-#TODO : deal with AWX_RELEASE
-#FIXME : prefer creating target dir here => send with env => env used to override dest for mount points
+
+if [ "" == "$AWX_VERSION" ]; then
+AWX_VERSION="9.0.1"
+fi
 
 function bootstrap {
-  # TODO : test target exist here + add AWX_TARGET_DIR option
+  # AWX_TARGET_DIR option
   mkdir -p ${AWX_TARGET_DIR}/config
 
-  # TODO : local value file instead dumping default
+  # TODO : use local value file instead dumping default as option
   cat > config/values.yml <<EOF
 ---
-awx_web_docker_actual_image: "ansible/awx_web:9.0.1"
-awx_task_docker_actual_image: "ansible/awx_task:9.0.1"
+awx_web_docker_actual_image: "ansible/awx_web:$AWX_VERSION"
+awx_task_docker_actual_image: "ansible/awx_task:$AWX_VERSION"
 
 # Common Docker parameters
 awx_task_hostname: awx
