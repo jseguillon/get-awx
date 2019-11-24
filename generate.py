@@ -2,20 +2,20 @@
 
 import os, yaml, json, shlex, datetime
 import logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 from jinja2 import Environment, FileSystemLoader
 from datetime import datetime
 from shutil import copyfile
 
-# Mimic Ansible addionak Jinja filter
+# Mimic Ansible addional Jinja filter
 def quote(input):
     logging.debug("Quoting : %s", input)
     return shlex.quote(str(input))
 
 # Prepare Jinja envs
 env = Environment(loader = FileSystemLoader("/awx"), trim_blocks=True, lstrip_blocks=True)
-env.filters['quote'] = quote # Reigster quote filer
+env.filters['quote'] = quote # Register quote filer
 
 # put local config to root Jinja
 copyfile("/opt/local/config/values.yml", "/awx/config/values.yml")
@@ -52,7 +52,7 @@ templates = os.listdir(source_template_dir)
 logging.debug(templates)
 
 # Create target dir then iterate
-os.makedirs(config_src['docker_compose_dir'], exist_ok=True)
+os.makedirs("/opt/local/.awx", exist_ok=True)
 for templateName in templates:
     logging.info("Generating from : %s", templateName)
 
@@ -61,8 +61,8 @@ for templateName in templates:
     logging.debug(data)
 
     # Render template
-    target=os.path.join(config_src['docker_compose_dir'],os.path.splitext(templateName)[0])
-    logging.info("Dumping to : %s ", config_src['docker_compose_dir'])
+    target=os.path.join("/opt/local/.awx",os.path.splitext(templateName)[0])
+    logging.info("Dumping to : %s ", target)
 
     f = open(target, "w")
     f.write(data)
@@ -71,6 +71,6 @@ for templateName in templates:
 logging.info("Create secret key file")
 
 # Dump static secret key
-f = open(os.path.join(config_src['docker_compose_dir'], "SECRET_KEY"), "w")
+f = open(os.path.join("/opt/local/.awx", "SECRET_KEY"), "w")
 f.write(config_src['secret_key'])
 f.close()

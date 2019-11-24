@@ -34,7 +34,7 @@ awx_task_docker_actual_image: "ansible/awx_task:$AWX_VERSION"
 
 docker_compose_dir: "${AWX_TARGET_DIR}/.awx"
 EOF
-  docker run -v ${AWX_TARGET_DIR}/:/opt/local/ jseguillon/get-awx
+  docker run -v ${AWX_TARGET_DIR}:/opt/local/ jseguillon/get-awx
 }
 
 function up_awx {
